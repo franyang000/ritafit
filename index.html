@@ -1,179 +1,520 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Rita好心情體重管理</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rita 好心情體重管理｜瘦下來，也穩下來。</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    :root {
+      --green-50:  #e8f5e2;
+      --green-100: #c5e8b4;
+      --green-400: #6aaf5a;
+      --green-600: #3e7d2e;
+      --green-800: #1e4515;
+      --amber-50:  #fef3dc;
+      --amber-400: #c47f1a;
+      --rose-50:   #fde9ef;
+      --rose-400:  #c94f72;
+      --teal-50:   #dff4ef;
+      --teal-400:  #1a9a7a;
+      --gray-50:   #f6f6f4;
+      --gray-100:  #ededea;
+      --text-p:    #1c1c1a;
+      --text-s:    #5f5e5a;
+      --text-m:    #888780;
+      --bg:        #f9f8f5;
+      --bg-card:   #ffffff;
+      --border:    rgba(0,0,0,0.08);
+      --r-sm: 10px;
+      --r-md: 16px;
+      --r-lg: 24px;
+    }
 
-<style>
-body{
-  margin:0;
-  font-family:'Noto Sans TC',sans-serif;
-  background:#f3f7fb;
-  color:#2f3a4a;
-  line-height:1.6;
-}
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
-.card{
-  background:#fff;
-  border-radius:20px;
-  padding:24px;
-  border:1px solid #e2e8f0;
-  margin-bottom:16px;
-}
-h1,h2,h3{
-  font-family:'Noto Serif TC',serif;
-  margin:0 0 10px;
-}
-h1{font-size:34px;}
-h2{font-size:24px;}
-p{color:#5a6b7b;}
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg);
+      color: var(--text-p);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
 
-.btn{
-  display:block;
-  text-align:center;
-  padding:14px;
-  border-radius:999px;
-  margin-top:10px;
-  font-weight:600;
-}
-.primary{background:#5f819b;color:#fff;}
-.secondary{border:1px solid #cbd5e0;color:#333;}
+    a { text-decoration: none; }
 
-.grid{
-  display:grid;
-  gap:12px;
-}
-@media(min-width:768px){
-  .grid-3{grid-template-columns:repeat(3,1fr);}
-  .grid-2{grid-template-columns:repeat(2,1fr);}
-}
-.feature{
-  border:1px solid #e2e8f0;
-  border-radius:14px;
-  padding:14px;
-}
+    .page { max-width: 740px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
 
-.note{
-  border:1px dashed #cbd5e0;
-  padding:12px;
-  border-radius:12px;
-  margin-top:10px;
-  font-size:14px;
-}
+    /* Fade in */
+    .fi {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp .65s ease forwards;
+    }
+    .fi:nth-child(1){animation-delay:.00s}
+    .fi:nth-child(2){animation-delay:.08s}
+    .fi:nth-child(3){animation-delay:.16s}
+    .fi:nth-child(4){animation-delay:.24s}
+    .fi:nth-child(5){animation-delay:.32s}
+    .fi:nth-child(6){animation-delay:.40s}
+    .fi:nth-child(7){animation-delay:.48s}
+    .fi:nth-child(8){animation-delay:.56s}
+    @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
 
-</style>
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      min-height: 320px;
+      display: flex;
+      align-items: flex-end;
+      padding: 3rem 2.5rem 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1200&q=85') center/cover no-repeat;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg,rgba(10,28,12,.22) 0%,rgba(6,20,8,.88) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(106,175,90,.2);
+      border: 1px solid rgba(106,175,90,.5);
+      color: #9ddd8c;
+      font-size: 11px;
+      letter-spacing: .14em;
+      font-weight: 500;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: clamp(28px, 6vw, 40px);
+      font-weight: 700;
+      color: #f0f8ed;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+    .hero-desc {
+      font-size: 15px;
+      color: rgba(210,245,200,.75);
+      font-weight: 300;
+      max-width: 480px;
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--green-400);
+      color: #fff;
+      font-size: 14px; font-weight: 500;
+      padding: 10px 22px;
+      border-radius: 30px;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--green-600); transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      color: rgba(240,248,237,.9);
+      font-size: 14px; font-weight: 400;
+      padding: 10px 22px;
+      border-radius: 30px;
+      transition: background .2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,.25); }
+
+    /* ── Stats ── */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+    @media(max-width:480px){ .stat-row { grid-template-columns: 1fr; } }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 1.25rem;
+      text-align: center;
+      box-shadow: 0 1px 6px rgba(0,0,0,.05);
+    }
+    .stat-num {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 30px; font-weight: 700;
+      color: var(--green-600);
+      line-height: 1.2;
+    }
+    .stat-unit { font-size: 14px; font-weight: 500; color: var(--green-600); }
+    .stat-lbl { font-size: 12px; color: var(--text-m); margin-top: 4px; letter-spacing: .04em; }
+
+    /* ── Card ── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 2rem 2rem 1.75rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 1px 6px rgba(0,0,0,.05);
+    }
+    .sec-label {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--text-m);
+      margin-bottom: 1.25rem;
+    }
+    .card-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 22px; font-weight: 600;
+      color: var(--text-p);
+      margin-bottom: .75rem;
+      line-height: 1.5;
+    }
+    .card-body-text {
+      font-size: 15px; color: var(--text-s);
+      line-height: 1.85; font-weight: 300;
+    }
+
+    /* ── Problem grid ── */
+    .prob-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media(max-width:520px){ .prob-grid { grid-template-columns: 1fr; } }
+    .prob-item {
+      background: var(--gray-50);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      padding: 1.25rem 1.25rem 1.1rem;
+    }
+    .prob-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px;
+    }
+    .prob-item h3 { font-size: 14px; font-weight: 500; color: var(--text-p); margin-bottom: 6px; }
+    .prob-item p  { font-size: 13px; color: var(--text-s); line-height: 1.65; font-weight: 300; }
+
+    /* ── Method list ── */
+    .method-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 1rem; }
+    .method-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 15px; color: var(--text-s); line-height: 1.7; font-weight: 300;
+    }
+    .method-list li::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: var(--green-400);
+      border-radius: 50%;
+      margin-top: 9px;
+      flex-shrink: 0;
+    }
+
+    /* ── Split ── */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    @media(max-width:560px){
+      .split { grid-template-columns: 1fr; }
+      .split .split-img { order: -1 !important; }
+    }
+    .split-img { border-radius: var(--r-md); overflow: hidden; min-height: 220px; }
+    .split-img img { width:100%; height:100%; object-fit:cover; display:block; }
+    .split-content { display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+    .split-content h2 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 20px; font-weight: 600;
+      color: var(--text-p); line-height: 1.55;
+    }
+    .split-content p { font-size: 14px; color: var(--text-s); line-height: 1.85; font-weight: 300; }
+
+    /* ── Persona grid ── */
+    .persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media(max-width:480px){ .persona-grid { grid-template-columns: 1fr; } }
+    .persona-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--gray-50);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      padding: 14px 16px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .persona-item:hover { border-color: var(--green-400); box-shadow: 0 2px 12px rgba(106,175,90,.12); }
+    .p-icon { width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .pi-rose  { background: var(--rose-50); }
+    .pi-amber { background: var(--amber-50); }
+    .pi-teal  { background: var(--teal-50); }
+    .pi-green { background: var(--green-50); }
+    .persona-item p { font-size: 14px; color: var(--text-p); line-height: 1.65; font-weight: 400; }
+
+    /* ── Divider / Note ── */
+    .divider { border: none; border-top: 1px solid var(--gray-100); margin: 1.75rem 0; }
+    .note {
+      display: flex; gap: 10px; align-items: flex-start;
+      background: var(--green-50);
+      border-left: 3px solid var(--green-400);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 16px;
+    }
+    .note p { font-size: 13px; color: var(--green-800); line-height: 1.7; }
+
+    /* ── About ── */
+    .about-wrap { display: grid; grid-template-columns: 160px 1fr; gap: 1.75rem; align-items: start; }
+    @media(max-width:520px){ .about-wrap { grid-template-columns: 1fr; } }
+    .about-photo { border-radius: var(--r-md); overflow: hidden; aspect-ratio: 3/4; }
+    .about-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+    .about-text h2 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 20px; font-weight: 600;
+      line-height: 1.5; margin-bottom: 12px;
+    }
+    .about-text p { font-size: 14px; color: var(--text-s); line-height: 1.9; font-weight: 300; margin-bottom: 12px; }
+
+    /* ── CTA ── */
+    .cta-card {
+      background: var(--green-800);
+      border-radius: var(--r-lg);
+      padding: 2.75rem 2rem;
+      text-align: center;
+    }
+    .cta-eyebrow {
+      font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+      font-weight: 500; color: var(--green-100); margin-bottom: 14px;
+    }
+    .cta-card h2 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: clamp(20px, 4vw, 26px); font-weight: 700;
+      color: #f0f8ed; margin-bottom: 10px; line-height: 1.45;
+    }
+    .cta-card p { font-size: 14px; color: rgba(200,240,190,.75); font-weight: 300; margin-bottom: 28px; }
+    .btn-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green-400); color: #fff;
+      font-size: 15px; font-weight: 500;
+      padding: 13px 32px; border-radius: 30px;
+      transition: background .2s, transform .15s;
+    }
+    .btn-cta:hover { background: #5a9e4a; transform: translateY(-2px); }
+
+    /* ── Footer ── */
+    footer { text-align: center; margin-top: 3rem; font-size: 12px; color: var(--text-m); letter-spacing: .06em; }
+  </style>
 </head>
-
 <body>
+<div class="page">
 
-<div class="container">
+  <!-- ① Hero -->
+  <div class="hero fi">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Rita 好心情體重管理</div>
+      <h1>瘦下來，也穩下來。</h1>
+      <p class="hero-desc">
+        透過 12 堂課程，幫你重新建立飲食與生活節奏，<br>讓體重回到穩定狀態。
+      </p>
+      <div class="btn-group">
+        <a class="btn-primary" href="https://line.me/R/ti/p/@207iwzob" target="_blank">👉 直接加 LINE 諮詢</a>
+        <a class="btn-secondary" href="https://www.facebook.com/rita139139" target="_blank">FB 看看更多內容</a>
+      </div>
+    </div>
+  </div>
 
-<!-- HERO -->
-<div class="card">
-<h1>瘦下來，也穩下來。</h1>
-<p>
-Rita好心情體重管理，透過12堂課程，幫你重新建立飲食與生活節奏，
-讓體重回到穩定狀態。
-</p>
+  <!-- ② Stats -->
+  <div class="stat-row fi">
+    <div class="stat-card">
+      <div class="stat-num">12<span class="stat-unit"> 堂</span></div>
+      <div class="stat-lbl">系統課程建立</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="font-size:22px;padding-top:6px">更穩定</div>
+      <div class="stat-lbl">不再反覆循環</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="font-size:22px;padding-top:6px">可維持</div>
+      <div class="stat-lbl">生活中可執行</div>
+    </div>
+  </div>
 
-<a href="https://line.me/R/ti/p/@207iwzob" class="btn primary">👉 直接加LINE諮詢</a>
-<a href="https://www.facebook.com/rita139139" class="btn secondary">FB看看更多內容</a>
+  <!-- ③ Problems -->
+  <div class="card fi">
+    <p class="sec-label">你是不是也卡在這裡？</p>
+    <div class="prob-grid">
 
-<div class="grid grid-3" style="margin-top:15px;">
-<div class="feature"><strong>12堂</strong><br>系統建立</div>
-<div class="feature"><strong>更穩定</strong><br>不再反覆</div>
-<div class="feature"><strong>可維持</strong><br>生活中可執行</div>
+      <div class="prob-item">
+        <div class="prob-icon" style="background:var(--rose-50)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c94f72" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <h3>身形變化</h3>
+        <p>腰間變厚、褲子變緊，卻不知從哪裡開始</p>
+      </div>
+
+      <div class="prob-item">
+        <div class="prob-icon" style="background:var(--amber-50)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c47f1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3>執行困難</h3>
+        <p>知道方法卻撐不久，意志力常常在第三天崩潰</p>
+      </div>
+
+      <div class="prob-item">
+        <div class="prob-icon" style="background:var(--teal-50)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a9a7a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1 4 1 10 7 10"/>
+            <path d="M3.51 15a9 9 0 1 0 .49-4.95"/>
+          </svg>
+        </div>
+        <h3>反覆循環</h3>
+        <p>瘦了又胖、胖了再瘦，感覺永遠在原地打轉</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ④ Method + image -->
+  <div class="split fi">
+    <div class="split-img">
+      <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=700&q=80" alt="健康飲食" loading="lazy" />
+    </div>
+    <div class="split-content">
+      <h2>我的方法，是幫你把<br>節奏重新排好</h2>
+      <p>體重管理不只是意志力，而是讓身體、飲食與生活回到適合你的節奏。</p>
+      <ul class="method-list">
+        <li>找出真正卡住的原因</li>
+        <li>建立能長期執行的方式</li>
+        <li>讓生活與身體慢慢穩下來</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ⑤ Course -->
+  <div class="card fi">
+    <p class="sec-label">主力方案</p>
+    <h2 class="card-title">12 堂體重管理課</h2>
+    <p class="card-body-text">
+      課程從你的體質與生活習慣切入，不要求備餐、不需要計算每一卡，<br>
+      學習用簡單原則在外食中也能做出聰明選擇，不再靠意志力硬撐。
+    </p>
+    <ul class="method-list" style="margin-top:1.25rem">
+      <li>從體質與生活習慣切入，找到屬於你的節奏</li>
+      <li>建立外食也能執行的飲食方式</li>
+      <li>不再靠意志力硬撐，讓習慣自然發生</li>
+    </ul>
+    <div style="margin-top:1.75rem">
+      <a class="btn-primary" href="https://line.me/R/ti/p/@207iwzob" target="_blank">👉 我要了解課程</a>
+    </div>
+  </div>
+
+  <!-- ⑥ Target audience -->
+  <div class="card fi">
+    <p class="sec-label">適合這些人</p>
+    <div class="persona-grid">
+
+      <div class="persona-item">
+        <div class="p-icon pi-rose">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c94f72" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <p>試過很多方法，卻總是維持不久的人</p>
+      </div>
+
+      <div class="persona-item">
+        <div class="p-icon pi-amber">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c47f1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <p>外食比例高、生活忙碌、作息不規律的人</p>
+      </div>
+
+      <div class="persona-item">
+        <div class="p-icon pi-teal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a9a7a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
+        <p>不想靠極端節食，想用穩定方式調整的人</p>
+      </div>
+
+      <div class="persona-item">
+        <div class="p-icon pi-green">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a9e38" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          </svg>
+        </div>
+        <p>想真正學會方法，而非只想短期瘦一下的人</p>
+      </div>
+
+    </div>
+
+    <hr class="divider" />
+
+    <div class="note">
+      <svg width="16" height="16" style="flex-shrink:0;margin-top:3px" viewBox="0 0 24 24" fill="none" stroke="#4a9e38" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <p>可補充：服務族群、報名前須知、是否提供諮詢或體驗流程等說明內容。</p>
+    </div>
+  </div>
+
+  <!-- ⑦ About Rita -->
+  <div class="card fi">
+    <p class="sec-label">關於 Rita 好心情體重管理</p>
+    <div class="about-wrap">
+      <div class="about-photo">
+        <img src="rita.jpg" alt="Rita 顧問照片" loading="lazy" />
+      </div>
+      <div class="about-text">
+        <h2>真正有效的體重管理，<br>是打造全新的生活習慣</h2>
+        <p>
+          很多人卡住，並不是不努力，而是生活方式沒有被重新建立。當飲食、作息與身體節奏沒有協調，體重自然難以穩定。
+        </p>
+        <p>
+          我專注在協助學員從生活中調整體質與習慣，讓體重管理變成一件可以長期維持的事。
+        </p>
+        <a class="btn-primary" href="https://www.facebook.com/rita139139" target="_blank" style="display:inline-flex;margin-top:4px">FB 看看更多內容</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑧ CTA -->
+  <div class="cta-card fi">
+    <p class="cta-eyebrow">現在開始</p>
+    <h2>先了解你的卡關點，<br>看看適不適合這堂課</h2>
+    <p>免費諮詢，無壓力，讓我們一起找到屬於你的方式。</p>
+    <a class="btn-cta" href="https://line.me/R/ti/p/@207iwzob" target="_blank">👉 免費諮詢</a>
+  </div>
+
+  <footer>© 2026 Rita 好心情體重管理</footer>
+
 </div>
-</div>
-
-<!-- PROBLEM -->
-<div class="card">
-<h2>你是不是也卡在這裡？</h2>
-<div class="grid grid-3">
-<div class="feature">
-<strong>身形變化</strong><br>
-腰間變厚、褲子變緊
-</div>
-<div class="feature">
-<strong>執行困難</strong><br>
-知道方法卻撐不久
-</div>
-<div class="feature">
-<strong>反覆循環</strong><br>
-瘦了又胖很疲累
-</div>
-</div>
-</div>
-
-<!-- METHOD -->
-<div class="card">
-<h2>我的方法，是幫你把節奏重新排好</h2>
-<p>
-體重管理不只是意志力，而是讓身體、飲食與生活回到適合你的節奏。
-</p>
-
-<ul>
-<li>找出真正卡住的原因</li>
-<li>建立能長期執行的方式</li>
-<li>讓生活與身體慢慢穩下來</li>
-</ul>
-</div>
-
-<!-- COURSE -->
-<div class="card">
-<h2>主力方案｜12堂體重管理課</h2>
-
-<ul>
-<li>從體質與生活習慣切入</li>
-<li>建立外食也能執行的方式</li>
-<li>不再靠意志力硬撐</li>
-</ul>
-
-<a href="https://line.me/R/ti/p/@207iwzob" class="btn primary">
-👉 我要了解課程
-</a>
-</div>
-
-<!-- ABOUT -->
-<div class="card">
-<h2>關於 Rita 好心情體重管理</h2>
-
-<h3>真正有效的體重管理，是打造全新的生活習慣</h3>
-
-<p>
-很多人卡住，並不是不努力，而是生活方式沒有被重新建立。
-當飲食、作息與身體節奏沒有協調，體重自然難以穩定。
-</p>
-
-<div class="note">
-我專注在協助學員從生活中調整體質與習慣，
-讓體重管理變成一件可以長期維持的事。
-</div>
-
-</div>
-
-<!-- CTA -->
-<div class="card">
-<h2>現在開始</h2>
-<p>先了解你的卡關點，看看適不適合這堂課</p>
-
-<a href="https://line.me/R/ti/p/@207iwzob" class="btn primary">
-👉 免費諮詢
-</a>
-</div>
-
-<footer style="text-align:center;margin-top:20px;color:#888;font-size:13px;">
-© 2026 Rita好心情體重管理
-</footer>
-
-</div>
-
 </body>
 </html>
