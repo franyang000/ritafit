@@ -1,145 +1,177 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rita好心情體重管理</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rita好心情體重管理</title>
 
-  <!-- 字體 -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      background: #f5f7fa;
-      color: #2f3a4a;
-    }
+<style>
+body{
+  margin:0;
+  font-family:'Noto Sans TC',sans-serif;
+  background:#f3f7fb;
+  color:#2f3a4a;
+  line-height:1.6;
+}
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+.card{
+  background:#fff;
+  border-radius:20px;
+  padding:24px;
+  border:1px solid #e2e8f0;
+  margin-bottom:16px;
+}
+h1,h2,h3{
+  font-family:'Noto Serif TC',serif;
+  margin:0 0 10px;
+}
+h1{font-size:34px;}
+h2{font-size:24px;}
+p{color:#5a6b7b;}
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 24px;
-    }
+.btn{
+  display:block;
+  text-align:center;
+  padding:14px;
+  border-radius:999px;
+  margin-top:10px;
+  font-weight:600;
+}
+.primary{background:#5f819b;color:#fff;}
+.secondary{border:1px solid #cbd5e0;color:#333;}
 
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 32px;
-      border: 1px solid #e2e8f0;
-      margin-bottom: 24px;
-    }
+.grid{
+  display:grid;
+  gap:12px;
+}
+@media(min-width:768px){
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .grid-2{grid-template-columns:repeat(2,1fr);}
+}
+.feature{
+  border:1px solid #e2e8f0;
+  border-radius:14px;
+  padding:14px;
+}
 
-    h1 {
-      font-family: 'Noto Serif TC', serif;
-      font-size: 40px;
-      margin-bottom: 16px;
-    }
+.note{
+  border:1px dashed #cbd5e0;
+  padding:12px;
+  border-radius:12px;
+  margin-top:10px;
+  font-size:14px;
+}
 
-    h2 {
-      font-family: 'Noto Serif TC', serif;
-      font-size: 26px;
-      margin-bottom: 12px;
-    }
-
-    p {
-      line-height: 1.7;
-      color: #4a5568;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 20px;
-      border-radius: 999px;
-      text-decoration: none;
-      margin-right: 10px;
-      font-weight: 500;
-    }
-
-    .btn-primary {
-      background: #5b7c99;
-      color: white;
-    }
-
-    .btn-secondary {
-      border: 1px solid #cbd5e0;
-      color: #4a5568;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 20px;
-    }
-
-    .feature {
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 16px;
-      text-align: center;
-    }
-
-    @media (max-width: 768px) {
-      h1 { font-size: 28px; }
-      .grid { grid-template-columns: 1fr; }
-    }
-  </style>
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-  <!-- HERO -->
-  <div class="card">
-    <h1>瘦下來，也穩下來。</h1>
-    <p>
-      Rita好心情體重管理，透過 12 堂系統課程，帶你重新認識身體與飲食的關係，
-      讓減重不再反覆，而是穩定維持。
-    </p>
+<!-- HERO -->
+<div class="card">
+<h1>瘦下來，也穩下來。</h1>
+<p>
+Rita好心情體重管理，透過12堂課程，幫你重新建立飲食與生活節奏，
+讓體重回到穩定狀態。
+</p>
 
-    <a href="https://line.me/R/ti/p/你的LINEID" class="btn btn-primary">
-      👉 直接加LINE諮詢
-    </a>
+<a href="https://line.me/R/ti/p/@207iwzob" class="btn primary">👉 直接加LINE諮詢</a>
+<a href="https://www.facebook.com/rita139139" class="btn secondary">FB看看更多內容</a>
 
-    <a href="mailto:你的信箱" class="btn btn-secondary">
-      Email 聯絡
-    </a>
+<div class="grid grid-3" style="margin-top:15px;">
+<div class="feature"><strong>12堂</strong><br>系統建立</div>
+<div class="feature"><strong>更穩定</strong><br>不再反覆</div>
+<div class="feature"><strong>可維持</strong><br>生活中可執行</div>
+</div>
+</div>
 
-    <div class="grid">
-      <div class="feature">
-        <strong>12堂</strong><br>完整系統
-      </div>
-      <div class="feature">
-        <strong>更穩定</strong><br>不再復胖
-      </div>
-      <div class="feature">
-        <strong>更實際</strong><br>能長期維持
-      </div>
-    </div>
-  </div>
+<!-- PROBLEM -->
+<div class="card">
+<h2>你是不是也卡在這裡？</h2>
+<div class="grid grid-3">
+<div class="feature">
+<strong>身形變化</strong><br>
+腰間變厚、褲子變緊
+</div>
+<div class="feature">
+<strong>執行困難</strong><br>
+知道方法卻撐不久
+</div>
+<div class="feature">
+<strong>反覆循環</strong><br>
+瘦了又胖很疲累
+</div>
+</div>
+</div>
 
-  <!-- 課程 -->
-  <div class="card">
-    <h2>你會學到的</h2>
-    <p>不只是吃什麼，而是理解身體運作：</p>
-    <ul>
-      <li>如何讓代謝回到正常節奏</li>
-      <li>為什麼你明明努力卻瘦不下來</li>
-      <li>建立可長期維持的飲食方式</li>
-    </ul>
-  </div>
+<!-- METHOD -->
+<div class="card">
+<h2>我的方法，是幫你把節奏重新排好</h2>
+<p>
+體重管理不只是意志力，而是讓身體、飲食與生活回到適合你的節奏。
+</p>
 
-  <!-- CTA -->
-  <div class="card">
-    <h2>現在開始</h2>
-    <p>如果你已經卡關很久，這會是你轉變的開始。</p>
+<ul>
+<li>找出真正卡住的原因</li>
+<li>建立能長期執行的方式</li>
+<li>讓生活與身體慢慢穩下來</li>
+</ul>
+</div>
 
-    <a href="https://line.me/R/ti/p/@207iwzob" class="btn btn-primary">
-      👉 免費了解你的卡關點
-    </a>
-  </div>
+<!-- COURSE -->
+<div class="card">
+<h2>主力方案｜12堂體重管理課</h2>
+
+<ul>
+<li>從體質與生活習慣切入</li>
+<li>建立外食也能執行的方式</li>
+<li>不再靠意志力硬撐</li>
+</ul>
+
+<a href="https://line.me/R/ti/p/@207iwzob" class="btn primary">
+👉 我要了解課程
+</a>
+</div>
+
+<!-- ABOUT -->
+<div class="card">
+<h2>關於 Rita 好心情體重管理</h2>
+
+<h3>真正有效的體重管理，是打造全新的生活習慣</h3>
+
+<p>
+很多人卡住，並不是不努力，而是生活方式沒有被重新建立。
+當飲食、作息與身體節奏沒有協調，體重自然難以穩定。
+</p>
+
+<div class="note">
+我專注在協助學員從生活中調整體質與習慣，
+讓體重管理變成一件可以長期維持的事。
+</div>
+
+</div>
+
+<!-- CTA -->
+<div class="card">
+<h2>現在開始</h2>
+<p>先了解你的卡關點，看看適不適合這堂課</p>
+
+<a href="https://line.me/R/ti/p/@207iwzob" class="btn primary">
+👉 免費諮詢
+</a>
+</div>
+
+<footer style="text-align:center;margin-top:20px;color:#888;font-size:13px;">
+© 2026 Rita好心情體重管理
+</footer>
 
 </div>
 
