@@ -6,515 +6,940 @@
   <title>Rita 好心情體重管理｜瘦下來，也穩下來。</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; width: 100%; }
 
     :root {
-      --green-50:  #e8f5e2;
-      --green-100: #c5e8b4;
-      --green-400: #6aaf5a;
-      --green-600: #3e7d2e;
-      --green-800: #1e4515;
-      --amber-50:  #fef3dc;
-      --amber-400: #c47f1a;
-      --rose-50:   #fde9ef;
-      --rose-400:  #c94f72;
-      --teal-50:   #dff4ef;
-      --teal-400:  #1a9a7a;
-      --gray-50:   #f6f6f4;
-      --gray-100:  #ededea;
-      --text-p:    #1c1c1a;
-      --text-s:    #5f5e5a;
-      --text-m:    #888780;
-      --bg:        #f9f8f5;
-      --bg-card:   #ffffff;
-      --border:    rgba(0,0,0,0.08);
-      --r-sm: 10px;
-      --r-md: 16px;
-      --r-lg: 24px;
+      --cream:      #F8F5EE;
+      --white:      #FEFCF7;
+      --charcoal:   #1C2018;
+      --mid:        #3A3D35;
+      --muted:      #7A7A6E;
+      --green-deep: #2C4827;
+      --green-mid:  #4B7A3E;
+      --green-soft: #7AB86A;
+      --green-pale: #EAF2E6;
+      --yellow:     #F0C93A;
+      --border:     rgba(28,32,24,0.10);
+      --border-med: rgba(28,32,24,0.18);
+      --f-display:  'Outfit', system-ui, sans-serif;
+      --f-body:     'Noto Sans TC', system-ui, sans-serif;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Noto Sans TC', sans-serif;
-      background: var(--bg);
-      color: var(--text-p);
+      font-family: var(--f-body);
+      background: var(--cream);
+      color: var(--charcoal);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    a { text-decoration: none; }
-
-    .page { max-width: 740px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
-
-    /* Fade in */
-    .fi {
+    /* ── Reveal ── */
+    .rv {
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp .65s ease forwards;
+      transform: translateY(22px);
+      transition: opacity .75s ease, transform .75s ease;
     }
-    .fi:nth-child(1){animation-delay:.00s}
-    .fi:nth-child(2){animation-delay:.08s}
-    .fi:nth-child(3){animation-delay:.16s}
-    .fi:nth-child(4){animation-delay:.24s}
-    .fi:nth-child(5){animation-delay:.32s}
-    .fi:nth-child(6){animation-delay:.40s}
-    .fi:nth-child(7){animation-delay:.48s}
-    .fi:nth-child(8){animation-delay:.56s}
-    @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+    .rv.on { opacity: 1; transform: none; }
 
-    /* ── Hero ── */
+    /* ── Layout ── */
+    .outer {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    @media(min-width:768px){ .outer { padding: 0 4rem; } }
+
+    /* ──────────────────────────────
+       HERO — full-bleed, image fills left
+    ────────────────────────────────*/
     .hero {
-      position: relative;
-      border-radius: var(--r-lg);
+      display: grid;
+      grid-template-columns: 1fr;
+      min-height: 100svh;
+      background: var(--green-deep);
       overflow: hidden;
-      min-height: 320px;
-      display: flex;
-      align-items: flex-end;
-      padding: 3rem 2.5rem 2.5rem;
-      margin-bottom: 1.5rem;
+      position: relative;
     }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1200&q=85') center/cover no-repeat;
-    }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(160deg,rgba(10,28,12,.22) 0%,rgba(6,20,8,.88) 100%);
-    }
-    .hero-content { position: relative; z-index: 2; }
-    .hero-eyebrow {
-      display: inline-block;
-      background: rgba(106,175,90,.2);
-      border: 1px solid rgba(106,175,90,.5);
-      color: #9ddd8c;
-      font-size: 11px;
-      letter-spacing: .14em;
-      font-weight: 500;
-      text-transform: uppercase;
-      padding: 4px 14px;
-      border-radius: 20px;
-      margin-bottom: 16px;
-    }
-    .hero h1 {
-      font-family: 'Noto Serif TC', serif;
-      font-size: clamp(28px, 6vw, 40px);
-      font-weight: 700;
-      color: #f0f8ed;
-      line-height: 1.35;
-      margin-bottom: 12px;
-    }
-    .hero-desc {
-      font-size: 15px;
-      color: rgba(210,245,200,.75);
-      font-weight: 300;
-      max-width: 480px;
-      line-height: 1.8;
-      margin-bottom: 28px;
-    }
-    .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--green-400);
-      color: #fff;
-      font-size: 14px; font-weight: 500;
-      padding: 10px 22px;
-      border-radius: 30px;
-      transition: background .2s, transform .15s;
-    }
-    .btn-primary:hover { background: var(--green-600); transform: translateY(-1px); }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(255,255,255,.15);
-      border: 1px solid rgba(255,255,255,.3);
-      color: rgba(240,248,237,.9);
-      font-size: 14px; font-weight: 400;
-      padding: 10px 22px;
-      border-radius: 30px;
-      transition: background .2s;
-    }
-    .btn-secondary:hover { background: rgba(255,255,255,.25); }
-
-    /* ── Stats ── */
-    .stat-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 1.5rem;
-    }
-    @media(max-width:480px){ .stat-row { grid-template-columns: 1fr; } }
-    .stat-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--r-md);
-      padding: 1.25rem;
-      text-align: center;
-      box-shadow: 0 1px 6px rgba(0,0,0,.05);
-    }
-    .stat-num {
-      font-family: 'Noto Serif TC', serif;
-      font-size: 30px; font-weight: 700;
-      color: var(--green-600);
-      line-height: 1.2;
-    }
-    .stat-unit { font-size: 14px; font-weight: 500; color: var(--green-600); }
-    .stat-lbl { font-size: 12px; color: var(--text-m); margin-top: 4px; letter-spacing: .04em; }
-
-    /* ── Card ── */
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--r-md);
-      padding: 2rem 2rem 1.75rem;
-      margin-bottom: 1.25rem;
-      box-shadow: 0 1px 6px rgba(0,0,0,.05);
-    }
-    .sec-label {
-      font-size: 11px; font-weight: 500;
-      letter-spacing: .14em; text-transform: uppercase;
-      color: var(--text-m);
-      margin-bottom: 1.25rem;
-    }
-    .card-title {
-      font-family: 'Noto Serif TC', serif;
-      font-size: 22px; font-weight: 600;
-      color: var(--text-p);
-      margin-bottom: .75rem;
-      line-height: 1.5;
-    }
-    .card-body-text {
-      font-size: 15px; color: var(--text-s);
-      line-height: 1.85; font-weight: 300;
+    @media(min-width:800px){
+      .hero { grid-template-columns: 58% 42%; }
     }
 
-    /* ── Problem grid ── */
-    .prob-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+    .hero-img {
+      position: relative;
+      overflow: hidden;
+      min-height: 60vw;
     }
-    @media(max-width:520px){ .prob-grid { grid-template-columns: 1fr; } }
-    .prob-item {
-      background: var(--gray-50);
-      border: 1px solid var(--border);
-      border-radius: var(--r-sm);
-      padding: 1.25rem 1.25rem 1.1rem;
-    }
-    .prob-icon {
-      width: 38px; height: 38px;
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 12px;
-    }
-    .prob-item h3 { font-size: 14px; font-weight: 500; color: var(--text-p); margin-bottom: 6px; }
-    .prob-item p  { font-size: 13px; color: var(--text-s); line-height: 1.65; font-weight: 300; }
+    @media(min-width:800px){ .hero-img { min-height: unset; } }
 
-    /* ── Method list ── */
-    .method-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 1rem; }
-    .method-list li {
-      display: flex; align-items: flex-start; gap: 10px;
-      font-size: 15px; color: var(--text-s); line-height: 1.7; font-weight: 300;
+    .hero-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: filter 2s ease;
     }
-    .method-list li::before {
+    .hero-img:hover img { filter: saturate(1.1); }
+
+    /* gradient bridge between image and text */
+    .hero-img::after {
       content: '';
-      width: 7px; height: 7px;
-      background: var(--green-400);
-      border-radius: 50%;
-      margin-top: 9px;
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, transparent 50%, var(--green-deep) 100%);
+    }
+    @media(max-width:799px){
+      .hero-img::after {
+        background: linear-gradient(to bottom, transparent 55%, var(--green-deep) 100%);
+      }
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem 1.75rem 4rem;
+      position: relative; z-index: 1;
+    }
+    @media(min-width:800px){ .hero-text { padding: 6rem 5rem 6rem 3rem; } }
+
+    .hero-tag {
+      font-family: var(--f-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--green-soft);
+      margin-bottom: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 28px; height: 2px;
+      background: var(--yellow);
       flex-shrink: 0;
     }
 
-    /* ── Split ── */
-    .split {
+    .hero h1 {
+      font-family: var(--f-display);
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800;
+      line-height: .98;
+      letter-spacing: -.03em;
+      color: var(--white);
+      margin-bottom: 1.75rem;
+    }
+    .hero h1 span {
+      color: var(--yellow);
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: rgba(238,245,235,.62);
+      font-weight: 300;
+      line-height: 1.9;
+      max-width: 320px;
+      margin-bottom: 2.75rem;
+    }
+
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--f-display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 0 1.75rem;
+      height: 46px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: background .3s ease, color .3s ease, transform .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-fill {
+      background: var(--yellow);
+      color: var(--charcoal);
+    }
+    .btn-fill:hover { background: #e8bc28; }
+
+    .btn-line {
+      background: transparent;
+      color: rgba(238,245,235,.75);
+      border: 1.5px solid rgba(238,245,235,.3);
+    }
+    .btn-line:hover { border-color: rgba(238,245,235,.7); color: var(--white); }
+
+    .btn-dark {
+      background: var(--green-deep);
+      color: var(--white);
+    }
+    .btn-dark:hover { background: var(--green-mid); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--green-deep);
+      border: 1.5px solid var(--green-mid);
+    }
+    .btn-ghost:hover { background: var(--green-pale); }
+
+
+
+    /* ──────────────────────────────
+       SECTION : PROBLEMS
+       Three items in a horizontal rule layout
+    ────────────────────────────────*/
+    .problems { padding: 6rem 0; }
+
+    .problems-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1.5px solid var(--border-med);
+      margin-bottom: 0;
+    }
+
+    .sec-label {
+      font-family: var(--f-display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+    }
+
+    .problems-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
+      grid-template-columns: 1fr;
+    }
+    @media(min-width:700px){
+      .problems-row { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .prob-item {
+      padding: 2.5rem 0;
+      border-bottom: 1.5px solid var(--border);
+      position: relative;
+      transition: background .35s ease;
+    }
+    @media(min-width:700px){
+      .prob-item {
+        padding: 3rem 2.5rem 3rem 0;
+        border-bottom: none;
+        border-right: 1.5px solid var(--border);
+      }
+      .prob-item:last-child { border-right: none; }
+      .prob-item + .prob-item { padding-left: 2.5rem; }
+    }
+
+    .prob-num {
+      font-family: var(--f-display);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      color: var(--green-soft);
       margin-bottom: 1.25rem;
     }
-    @media(max-width:560px){
-      .split { grid-template-columns: 1fr; }
-      .split .split-img { order: -1 !important; }
-    }
-    .split-img { border-radius: var(--r-md); overflow: hidden; min-height: 220px; }
-    .split-img img { width:100%; height:100%; object-fit:cover; display:block; }
-    .split-content { display: flex; flex-direction: column; justify-content: center; gap: 14px; }
-    .split-content h2 {
-      font-family: 'Noto Serif TC', serif;
-      font-size: 20px; font-weight: 600;
-      color: var(--text-p); line-height: 1.55;
-    }
-    .split-content p { font-size: 14px; color: var(--text-s); line-height: 1.85; font-weight: 300; }
 
-    /* ── Persona grid ── */
-    .persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    @media(max-width:480px){ .persona-grid { grid-template-columns: 1fr; } }
-    .persona-item {
-      display: flex; align-items: flex-start; gap: 12px;
-      background: var(--gray-50);
-      border: 1px solid var(--border);
-      border-radius: var(--r-sm);
-      padding: 14px 16px;
-      transition: border-color .2s, box-shadow .2s;
+    .prob-title {
+      font-family: var(--f-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--charcoal);
+      line-height: 1.2;
+      margin-bottom: .75rem;
     }
-    .persona-item:hover { border-color: var(--green-400); box-shadow: 0 2px 12px rgba(106,175,90,.12); }
-    .p-icon { width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-    .pi-rose  { background: var(--rose-50); }
-    .pi-amber { background: var(--amber-50); }
-    .pi-teal  { background: var(--teal-50); }
-    .pi-green { background: var(--green-50); }
-    .persona-item p { font-size: 14px; color: var(--text-p); line-height: 1.65; font-weight: 400; }
 
-    /* ── Divider / Note ── */
-    .divider { border: none; border-top: 1px solid var(--gray-100); margin: 1.75rem 0; }
-    .note {
-      display: flex; gap: 10px; align-items: flex-start;
-      background: var(--green-50);
-      border-left: 3px solid var(--green-400);
-      border-radius: 0 10px 10px 0;
-      padding: 14px 16px;
+    .prob-desc {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-weight: 300;
     }
-    .note p { font-size: 13px; color: var(--green-800); line-height: 1.7; }
 
-    /* ── About ── */
-    .about-wrap { display: grid; grid-template-columns: 160px 1fr; gap: 1.75rem; align-items: start; }
-    @media(max-width:520px){ .about-wrap { grid-template-columns: 1fr; } }
-    .about-photo { border-radius: var(--r-md); overflow: hidden; aspect-ratio: 3/4; }
-    .about-photo img { width:100%; height:100%; object-fit:cover; display:block; }
-    .about-text h2 {
-      font-family: 'Noto Serif TC', serif;
-      font-size: 20px; font-weight: 600;
-      line-height: 1.5; margin-bottom: 12px;
+    /* ──────────────────────────────
+       SECTION : METHOD
+       Full-bleed image with floating text
+    ────────────────────────────────*/
+    .method {
+      position: relative;
+      overflow: hidden;
     }
-    .about-text p { font-size: 14px; color: var(--text-s); line-height: 1.9; font-weight: 300; margin-bottom: 12px; }
 
-    /* ── CTA ── */
-    .cta-card {
-      background: var(--green-800);
-      border-radius: var(--r-lg);
-      padding: 2.75rem 2rem;
+    .method-img-wrap {
+      width: 100%;
+      height: 70vw;
+      max-height: 680px;
+      overflow: hidden;
+    }
+
+    .method-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%) brightness(.88);
+      transition: filter 1.8s ease;
+    }
+    .method:hover .method-img-wrap img { filter: grayscale(0%) brightness(.92); }
+
+    /* text overlay sits at bottom of image on mobile,
+       floats right on desktop */
+    .method-text-float {
+      background: var(--white);
+      padding: 3rem 2rem;
+    }
+    @media(min-width:768px){
+      .method-text-float {
+        position: absolute;
+        right: 0; bottom: 0;
+        width: 44%;
+        max-width: 480px;
+        padding: 3.5rem 4rem;
+        border-top: 2px solid var(--border-med);
+        border-left: 2px solid var(--border-med);
+      }
+    }
+
+    .method-text-float h2 {
+      font-family: var(--f-display);
+      font-size: clamp(1.9rem, 3.5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.025em;
+      color: var(--green-deep);
+      margin: 1rem 0 1.25rem;
+    }
+    .method-text-float h2 em {
+      font-style: normal;
+      color: var(--green-mid);
+    }
+
+    .method-text-float p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+
+    .method-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .method-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: .7rem 0;
+      border-top: 1px solid var(--border);
+      font-size: 16px;
+      color: var(--charcoal);
+      font-weight: 400;
+    }
+    .method-list li:last-child { border-bottom: 1px solid var(--border); }
+    .method-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green-soft);
+      flex-shrink: 0;
+    }
+
+    /* ──────────────────────────────
+       SECTION : COURSE — lesson timeline
+    ────────────────────────────────*/
+    .course {
+      background: var(--green-deep);
+      padding: 6rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .course-ghost {
+      position: absolute;
+      font-family: var(--f-display);
+      font-size: clamp(16rem, 30vw, 28rem);
+      font-weight: 800;
+      color: rgba(255,255,255,.03);
+      letter-spacing: -.06em;
+      line-height: 1;
+      right: -2rem; top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      user-select: none;
+    }
+    .course-sec-label {
+      font-family: var(--f-display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--green-soft);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .course-sec-label::before {
+      content: '';
+      width: 24px; height: 2px;
+      background: var(--yellow);
+    }
+    .course h2 {
+      font-family: var(--f-display);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -.03em;
+      color: var(--white);
+    }
+    .course h2 .yl { color: var(--yellow); }
+    .course-desc {
+      font-size: 16px;
+      color: rgba(238,245,235,.56);
+      line-height: 1.9;
+      font-weight: 300;
+    }
+
+    /* Lesson list */
+    .course-lessons {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    @media(min-width:680px){
+      .course-lessons { grid-template-columns: 1fr 1fr; column-gap: 3rem; }
+    }
+
+    .lesson-phase {
+      grid-column: 1 / -1;
+      padding: 2rem 0 .75rem;
+      border-top: 1px solid rgba(255,255,255,.08);
+      margin-top: .5rem;
+    }
+    .lesson-phase:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+
+    .phase-label {
+      font-family: var(--f-display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+
+    .lesson-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      transition: padding-left .25s ease, border-color .25s ease;
+      cursor: default;
+    }
+    .lesson-item:hover {
+      padding-left: .5rem;
+      border-bottom-color: rgba(255,255,255,.18);
+    }
+    .lesson-item:hover .lesson-num { color: var(--yellow); }
+    .lesson-last { border-bottom: none; }
+
+    .lesson-num {
+      font-family: var(--f-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      color: rgba(122,184,106,.55);
+      flex-shrink: 0;
+      width: 32px;
+      transition: color .25s ease;
+    }
+    .lesson-title {
+      font-family: var(--f-body);
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba(238,245,235,.85);
+      line-height: 1.4;
+    }
+
+    /* ──────────────────────────────
+       SECTION : AUDIENCE
+       Full-width alternating rows
+    ────────────────────────────────*/
+    .audience { padding: 6rem 0; background: var(--white); }
+
+    .audience-intro {
+      max-width: 600px;
+      margin-bottom: 5rem;
+    }
+    .audience-intro h2 {
+      font-family: var(--f-display);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -.03em;
+      color: var(--green-deep);
+      margin: 1rem 0 1rem;
+    }
+    .audience-intro h2 mark {
+      background: var(--yellow);
+      color: var(--charcoal);
+      padding: 0 .15em;
+      border-radius: 2px;
+    }
+    .audience-intro p {
+      font-size: 16px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.85;
+    }
+
+    /* alternating lines */
+    .aud-lines { border-top: 1.5px solid var(--border-med); }
+    .aud-line {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 2rem 0;
+      border-bottom: 1.5px solid var(--border);
+      transition: background .3s ease, padding-left .3s ease;
+    }
+    .aud-line:hover {
+      background: var(--green-pale);
+      padding-left: 1rem;
+      border-bottom-color: var(--border-med);
+    }
+
+    .aud-line-num {
+      font-family: var(--f-display);
+      font-size: 28px;
+      font-weight: 800;
+      color: rgba(75,122,62,.18);
+      letter-spacing: -.04em;
+      line-height: 1;
       text-align: center;
     }
-    .cta-eyebrow {
-      font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
-      font-weight: 500; color: var(--green-100); margin-bottom: 14px;
+    .aud-line-text {
+      font-size: 18px;
+      color: var(--charcoal);
+      font-weight: 400;
+      line-height: 1.55;
     }
-    .cta-card h2 {
-      font-family: 'Noto Serif TC', serif;
-      font-size: clamp(20px, 4vw, 26px); font-weight: 700;
-      color: #f0f8ed; margin-bottom: 10px; line-height: 1.45;
-    }
-    .cta-card p { font-size: 14px; color: rgba(200,240,190,.75); font-weight: 300; margin-bottom: 28px; }
-    .btn-cta {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--green-400); color: #fff;
-      font-size: 15px; font-weight: 500;
-      padding: 13px 32px; border-radius: 30px;
-      transition: background .2s, transform .15s;
-    }
-    .btn-cta:hover { background: #5a9e4a; transform: translateY(-2px); }
+    @media(min-width:700px){ .aud-line-text { font-size: 20px; } }
 
-    /* ── Footer ── */
-    footer { text-align: center; margin-top: 3rem; font-size: 12px; color: var(--text-m); letter-spacing: .06em; }
+    /* note strip */
+    .aud-note {
+      margin-top: 3rem;
+      padding: 1.5rem 0;
+      border-top: 1px dashed var(--green-soft);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .aud-note-dash {
+      width: 24px; height: 2px;
+      background: var(--green-soft);
+      flex-shrink: 0;
+      margin-top: 11px;
+    }
+    .aud-note p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    /* ──────────────────────────────
+       SECTION : ABOUT
+       Asymmetric 40/60 split, image left
+    ────────────────────────────────*/
+    .about {
+      background: var(--cream);
+      border-top: 1.5px solid var(--border);
+      padding: 0 0 6rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    @media(min-width:768px){
+      .about-grid { grid-template-columns: 42% 58%; min-height: 600px; }
+    }
+
+    .about-img {
+      overflow: hidden;
+      position: relative;
+      min-height: 380px;
+    }
+    @media(min-width:768px){ .about-img { min-height: unset; } }
+
+    .about-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(10%);
+      transition: filter 1.8s ease, transform 1.8s ease;
+    }
+    .about-img:hover img { filter: grayscale(0%); transform: scale(1.03); }
+
+    /* thin yellow line decoration */
+    .about-img::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 4px;
+      background: var(--yellow);
+    }
+    @media(min-width:768px){
+      .about-img::after { width: 4px; height: 100%; top: 0; left: auto; right: 0; bottom: auto; }
+    }
+
+    .about-content {
+      padding: 4rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    @media(min-width:768px){ .about-content { padding: 6rem 5rem; } }
+
+    .about-content h2 {
+      font-family: var(--f-display);
+      font-size: clamp(1.9rem, 3.5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.025em;
+      color: var(--green-deep);
+      margin: 1rem 0 1.5rem;
+    }
+    .about-content h2 em {
+      font-style: normal;
+      color: var(--green-mid);
+    }
+
+    .about-content p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.9;
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+
+    /* quote pull */
+    .about-pull {
+      border-left: 3px solid var(--yellow);
+      padding-left: 1.25rem;
+      margin: 2rem 0;
+    }
+    .about-pull p {
+      font-family: var(--f-display);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--green-deep);
+      line-height: 1.5;
+      font-style: italic;
+      margin: 0;
+    }
+
+    /* ──────────────────────────────
+       CTA
+    ────────────────────────────────*/
+    .cta {
+      background: var(--charcoal);
+      padding: 7rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* subtle pattern */
+    .cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(240,201,58,.07) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+
+    .cta-sec-label {
+      font-family: var(--f-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(238,245,235,.38);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+    .cta-sec-label::before, .cta-sec-label::after {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--yellow);
+    }
+
+    .cta h2 {
+      font-family: var(--f-display);
+      font-size: clamp(2.2rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: .97;
+      letter-spacing: -.035em;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+      position: relative; z-index: 1;
+    }
+    .cta h2 .yl { color: var(--yellow); }
+
+    .cta p {
+      font-size: 16px;
+      color: rgba(238,245,235,.48);
+      font-weight: 300;
+      max-width: 380px;
+      margin: 0 auto 3rem;
+      line-height: 1.85;
+      position: relative; z-index: 1;
+    }
+
+    .cta-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      position: relative; z-index: 1;
+    }
+
+    /* ──────────────────────────────
+       FOOTER
+    ────────────────────────────────*/
+    footer {
+      background: var(--charcoal);
+      border-top: 1px solid rgba(255,255,255,.05);
+      padding: 1.75rem;
+      text-align: center;
+    }
+    footer p {
+      font-family: var(--f-display);
+      font-size: 11px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.18);
+    }
   </style>
 </head>
 <body>
-<div class="page">
 
-  <!-- ① Hero -->
-  <div class="hero fi">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">Rita 好心情體重管理</div>
-      <h1>瘦下來，也穩下來。</h1>
-      <p class="hero-desc">
-        透過 12 堂課程，幫你重新建立飲食與生活節奏，<br>讓體重回到穩定狀態。
-      </p>
-      <div class="btn-group">
-        <a class="btn-primary" href="https://line.me/R/ti/p/@207iwzob" target="_blank">👉 直接加 LINE 諮詢</a>
-        <a class="btn-secondary" href="https://www.facebook.com/rita139139" target="_blank">FB 看看更多內容</a>
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-img">
+    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1400&q=85" alt="" />
+  </div>
+  <div class="hero-text rv">
+    <p class="hero-tag">Rita 好心情體重管理</p>
+    <h1>瘦下來，<span>也穩下來。</span></h1>
+    <p class="hero-sub">透過 12 堂課程，幫你重新建立飲食與生活節奏，讓體重回到穩定狀態。</p>
+    <div class="hero-btns">
+      <a class="btn btn-fill" href="https://line.me/R/ti/p/@207iwzob" target="_blank">LINE 直接諮詢</a>
+      <a class="btn btn-line" href="https://www.facebook.com/rita139139" target="_blank">FB 了解更多</a>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ── PROBLEMS ── -->
+<section class="problems">
+  <div class="outer">
+    <div class="problems-header rv">
+      <span class="sec-label">你是不是也卡在這裡？</span>
+    </div>
+    <div class="problems-row">
+      <div class="prob-item rv">
+        <p class="prob-num">— 01</p>
+        <p class="prob-title">身形變化</p>
+        <p class="prob-desc">腰間變厚、褲子變緊，卻不知道從哪裡開始改變</p>
+      </div>
+      <div class="prob-item rv">
+        <p class="prob-num">— 02</p>
+        <p class="prob-title">執行困難</p>
+        <p class="prob-desc">知道方法卻撐不久，意志力常常在第三天崩潰</p>
+      </div>
+      <div class="prob-item rv">
+        <p class="prob-num">— 03</p>
+        <p class="prob-title">反覆循環</p>
+        <p class="prob-desc">瘦了又胖、胖了再瘦，感覺永遠在原地打轉</p>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- ② Stats -->
-  <div class="stat-row fi">
-    <div class="stat-card">
-      <div class="stat-num">12<span class="stat-unit"> 堂</span></div>
-      <div class="stat-lbl">系統課程建立</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num" style="font-size:22px;padding-top:6px">更穩定</div>
-      <div class="stat-lbl">不再反覆循環</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num" style="font-size:22px;padding-top:6px">可維持</div>
-      <div class="stat-lbl">生活中可執行</div>
-    </div>
+<!-- ── METHOD ── -->
+<section class="method rv">
+  <div class="method-img-wrap">
+    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1400&q=80" alt="健康飲食" loading="lazy" />
   </div>
-
-  <!-- ③ Problems -->
-  <div class="card fi">
-    <p class="sec-label">你是不是也卡在這裡？</p>
-    <div class="prob-grid">
-
-      <div class="prob-item">
-        <div class="prob-icon" style="background:var(--rose-50)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c94f72" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-          </svg>
-        </div>
-        <h3>身形變化</h3>
-        <p>腰間變厚、褲子變緊，卻不知從哪裡開始</p>
-      </div>
-
-      <div class="prob-item">
-        <div class="prob-icon" style="background:var(--amber-50)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c47f1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
-        </div>
-        <h3>執行困難</h3>
-        <p>知道方法卻撐不久，意志力常常在第三天崩潰</p>
-      </div>
-
-      <div class="prob-item">
-        <div class="prob-icon" style="background:var(--teal-50)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a9a7a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="1 4 1 10 7 10"/>
-            <path d="M3.51 15a9 9 0 1 0 .49-4.95"/>
-          </svg>
-        </div>
-        <h3>反覆循環</h3>
-        <p>瘦了又胖、胖了再瘦，感覺永遠在原地打轉</p>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ④ Method + image -->
-  <div class="split fi">
-    <div class="split-img">
-      <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=700&q=80" alt="健康飲食" loading="lazy" />
-    </div>
-    <div class="split-content">
-      <h2>我的方法，是幫你把<br>節奏重新排好</h2>
-      <p>體重管理不只是意志力，而是讓身體、飲食與生活回到適合你的節奏。</p>
-      <ul class="method-list">
-        <li>找出真正卡住的原因</li>
-        <li>建立能長期執行的方式</li>
-        <li>讓生活與身體慢慢穩下來</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- ⑤ Course -->
-  <div class="card fi">
-    <p class="sec-label">主力方案</p>
-    <h2 class="card-title">12 堂體重管理課</h2>
-    <p class="card-body-text">
-      課程從你的體質與生活習慣切入，不要求備餐、不需要計算每一卡，<br>
-      學習用簡單原則在外食中也能做出聰明選擇，不再靠意志力硬撐。
-    </p>
-    <ul class="method-list" style="margin-top:1.25rem">
-      <li>從體質與生活習慣切入，找到屬於你的節奏</li>
-      <li>建立外食也能執行的飲食方式</li>
-      <li>不再靠意志力硬撐，讓習慣自然發生</li>
+  <div class="method-text-float">
+    <span class="sec-label">我的方法</span>
+    <h2>幫你把<br><em>節奏</em>重新<br>排好</h2>
+    <p>體重管理不只是意志力，而是讓身體、飲食與生活回到適合你的節奏。</p>
+    <ul class="method-list">
+      <li><span class="method-dot"></span>找出真正卡住的原因</li>
+      <li><span class="method-dot"></span>建立能長期執行的方式</li>
+      <li><span class="method-dot"></span>讓生活與身體慢慢穩下來</li>
     </ul>
-    <div style="margin-top:1.75rem">
-      <a class="btn-primary" href="https://line.me/R/ti/p/@207iwzob" target="_blank">👉 我要了解課程</a>
+  </div>
+</section>
+
+<!-- ── COURSE ── -->
+<section class="course">
+  <div class="course-ghost">12</div>
+  <div class="outer">
+    <div class="rv" style="margin-bottom:4rem">
+      <span class="course-sec-label">課程內容</span>
+      <h2 style="margin-top:1rem;margin-bottom:1rem">這段日子<br>我們會一起<br><span class="yl">經歷的所有發生</span></h2>
+      <p class="course-desc">從認識自己的身體開始，逐步建立飲食、作息、運動的完整節奏。</p>
+    </div>
+
+    <div class="course-lessons rv">
+      <!-- Phase 1 -->
+      <div class="lesson-phase">
+        <span class="phase-label">第一階段</span>
+      </div>
+      <div class="lesson-item"><span class="lesson-num">01</span><span class="lesson-title">量身</span></div>
+      <div class="lesson-item"><span class="lesson-num">02</span><span class="lesson-title">營養方程式</span></div>
+      <div class="lesson-item"><span class="lesson-num">03</span><span class="lesson-title">身體素質意義 &amp; 目標</span></div>
+      <div class="lesson-item"><span class="lesson-num">04</span><span class="lesson-title">睡眠重要性及影響</span></div>
+      <div class="lesson-item"><span class="lesson-num">05</span><span class="lesson-title">喝水喝多少</span></div>
+
+      <!-- Phase 2 -->
+      <div class="lesson-phase">
+        <span class="phase-label">第二階段</span>
+      </div>
+      <div class="lesson-item"><span class="lesson-num">06</span><span class="lesson-title">食物飯後高血糖影響 &amp; 碳水化合物</span></div>
+      <div class="lesson-item"><span class="lesson-num">07</span><span class="lesson-title">糖的影響 + 飲食結構</span></div>
+      <div class="lesson-item"><span class="lesson-num">08</span><span class="lesson-title">外食技巧 + 營養標示</span></div>
+      <div class="lesson-item"><span class="lesson-num">09</span><span class="lesson-title">生酮原理 &amp; 實行注意事項</span></div>
+      <div class="lesson-item"><span class="lesson-num">10</span><span class="lesson-title">腸道菌影響</span></div>
+
+      <!-- Phase 3 -->
+      <div class="lesson-phase">
+        <span class="phase-label">第三階段</span>
+      </div>
+      <div class="lesson-item"><span class="lesson-num">11</span><span class="lesson-title">運動類型及效果 + VO2MAX</span></div>
+      <div class="lesson-item"><span class="lesson-num">12</span><span class="lesson-title">營養素詳解</span></div>
+      <div class="lesson-item"><span class="lesson-num">13</span><span class="lesson-title">脂肪代謝及選擇</span></div>
+      <div class="lesson-item"><span class="lesson-num">14</span><span class="lesson-title">蛋白質影響、合成機制及選擇</span></div>
+      <div class="lesson-item"><span class="lesson-num">15</span><span class="lesson-title">激素對身體的影響</span></div>
+      <div class="lesson-item lesson-last"><span class="lesson-num">16</span><span class="lesson-title">總結複習 &amp; 維持秘訣</span></div>
+    </div>
+
+    <div class="rv" style="margin-top:3.5rem">
+      <a class="btn btn-fill" href="https://line.me/R/ti/p/@207iwzob" target="_blank">我要了解課程</a>
     </div>
   </div>
+</section>
 
-  <!-- ⑥ Target audience -->
-  <div class="card fi">
-    <p class="sec-label">適合這些人</p>
-    <div class="persona-grid">
-
-      <div class="persona-item">
-        <div class="p-icon pi-rose">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c94f72" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-          </svg>
-        </div>
-        <p>試過很多方法，卻總是維持不久的人</p>
-      </div>
-
-      <div class="persona-item">
-        <div class="p-icon pi-amber">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c47f1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
-        </div>
-        <p>外食比例高、生活忙碌、作息不規律的人</p>
-      </div>
-
-      <div class="persona-item">
-        <div class="p-icon pi-teal">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a9a7a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-            <polyline points="22 4 12 14.01 9 11.01"/>
-          </svg>
-        </div>
-        <p>不想靠極端節食，想用穩定方式調整的人</p>
-      </div>
-
-      <div class="persona-item">
-        <div class="p-icon pi-green">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a9e38" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-          </svg>
-        </div>
-        <p>想真正學會方法，而非只想短期瘦一下的人</p>
-      </div>
-
+<!-- ── AUDIENCE ── -->
+<section class="audience">
+  <div class="outer">
+    <div class="audience-intro rv">
+      <span class="sec-label">適合這些人</span>
+      <h2>這堂課，<br>是為<mark>你</mark>設計的</h2>
+      <p>不需要完美基礎，只需要一個真心想改變的念頭。</p>
     </div>
-
-    <hr class="divider" />
-
-    <div class="note">
-      <svg width="16" height="16" style="flex-shrink:0;margin-top:3px" viewBox="0 0 24 24" fill="none" stroke="#4a9e38" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <line x1="12" y1="8" x2="12" y2="12"/>
-        <line x1="12" y1="16" x2="12.01" y2="16"/>
-      </svg>
+    <div class="aud-lines rv">
+      <div class="aud-line">
+        <span class="aud-line-num">01</span>
+        <p class="aud-line-text">試過很多方法，卻總是維持不久的人</p>
+      </div>
+      <div class="aud-line">
+        <span class="aud-line-num">02</span>
+        <p class="aud-line-text">外食比例高、生活忙碌、作息不規律的人</p>
+      </div>
+      <div class="aud-line">
+        <span class="aud-line-num">03</span>
+        <p class="aud-line-text">不想靠極端節食，想用穩定方式調整的人</p>
+      </div>
+      <div class="aud-line">
+        <span class="aud-line-num">04</span>
+        <p class="aud-line-text">想真正學會方法，而非只想短期瘦一下的人</p>
+      </div>
+    </div>
+    <div class="aud-note rv">
+      <div class="aud-note-dash"></div>
       <p>可補充：服務族群、報名前須知、是否提供諮詢或體驗流程等說明內容。</p>
     </div>
   </div>
+</section>
 
-  <!-- ⑦ About Rita -->
-  <div class="card fi">
-    <p class="sec-label">關於 Rita 好心情體重管理</p>
-    <div class="about-wrap">
-      <div class="about-photo">
-        <img src="rita.jpg" alt="Rita 顧問照片" loading="lazy" />
+<!-- ── ABOUT ── -->
+<section class="about">
+  <div class="about-grid">
+    <div class="about-img rv">
+      <img src="rita.jpg" alt="Rita 顧問" loading="lazy" />
+    </div>
+    <div class="about-content rv">
+      <span class="sec-label">關於 Rita</span>
+      <h2>真正有效的體重管理，<br>是打造<em>全新習慣</em></h2>
+      <div class="about-pull">
+        <p>「很多人卡住，並不是不努力，而是生活方式沒有被重新建立。」</p>
       </div>
-      <div class="about-text">
-        <h2>真正有效的體重管理，<br>是打造全新的生活習慣</h2>
-        <p>
-          很多人卡住，並不是不努力，而是生活方式沒有被重新建立。當飲食、作息與身體節奏沒有協調，體重自然難以穩定。
-        </p>
-        <p>
-          我專注在協助學員從生活中調整體質與習慣，讓體重管理變成一件可以長期維持的事。
-        </p>
-        <a class="btn-primary" href="https://www.facebook.com/rita139139" target="_blank" style="display:inline-flex;margin-top:4px">FB 看看更多內容</a>
+      <p>當飲食、作息與身體節奏沒有協調，體重自然難以穩定。我專注在協助學員從生活中調整體質與習慣，讓體重管理變成一件可以長期維持的事。</p>
+      <div style="margin-top:2rem">
+        <a class="btn btn-ghost" href="https://www.facebook.com/rita139139" target="_blank">FB 看看更多內容</a>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- ⑧ CTA -->
-  <div class="cta-card fi">
-    <p class="cta-eyebrow">現在開始</p>
-    <h2>先了解你的卡關點，<br>看看適不適合這堂課</h2>
-    <p>免費諮詢，無壓力，讓我們一起找到屬於你的方式。</p>
-    <a class="btn-cta" href="https://line.me/R/ti/p/@207iwzob" target="_blank">👉 免費諮詢</a>
+<!-- ── CTA ── -->
+<section class="cta rv">
+  <div class="outer">
+    <p class="cta-sec-label">現在開始</p>
+    <h2>先了解你的<br>卡關點，<span class="yl">免費諮詢</span></h2>
+    <p>無壓力，讓我們一起找到屬於你的方式。</p>
+    <div class="cta-btns">
+      <a class="btn btn-fill" href="https://line.me/R/ti/p/@207iwzob" target="_blank">👉 LINE 免費諮詢</a>
+      <a class="btn btn-line" href="https://www.facebook.com/rita139139" target="_blank">FB 了解更多</a>
+    </div>
   </div>
+</section>
 
-  <footer>© 2026 Rita 好心情體重管理</footer>
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2026 Rita 好心情體重管理</p>
+</footer>
 
-</div>
+<script>
+  const els = document.querySelectorAll('.rv');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, _, arr) => {
+      if (!e.isIntersecting) return;
+      const sibs = [...e.target.parentElement.querySelectorAll('.rv:not(.on)')];
+      const i = sibs.indexOf(e.target);
+      setTimeout(() => e.target.classList.add('on'), Math.max(0, i) * 100);
+      obs.unobserve(e.target);
+    });
+  }, { threshold: 0.08 });
+  els.forEach(el => obs.observe(el));
+</script>
 </body>
 </html>
