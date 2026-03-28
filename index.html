@@ -366,7 +366,7 @@
        SECTION : COURSE — lesson timeline
     ────────────────────────────────*/
     .course {
-      background: var(--green-deep);
+      background: #1E2535;
       padding: 6rem 0;
       position: relative;
       overflow: hidden;
@@ -390,7 +390,7 @@
       font-weight: 700;
       letter-spacing: .22em;
       text-transform: uppercase;
-      color: var(--green-soft);
+      color: #8BBADD;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -411,9 +411,56 @@
     .course h2 .yl { color: var(--yellow); }
     .course-desc {
       font-size: 16px;
-      color: rgba(238,245,235,.56);
+      color: rgba(210,225,240,.6);
       line-height: 1.9;
       font-weight: 300;
+    }
+    .lesson-phase {
+      grid-column: 1 / -1;
+      padding: 2rem 0 .75rem;
+      border-top: 1px solid rgba(255,255,255,.08);
+      margin-top: .5rem;
+    }
+    .lesson-phase:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+    .phase-label {
+      font-family: var(--f-display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+    .lesson-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      transition: padding-left .25s ease, border-color .25s ease;
+      cursor: default;
+    }
+    .lesson-item:hover {
+      padding-left: .5rem;
+      border-bottom-color: rgba(255,255,255,.18);
+    }
+    .lesson-item:hover .lesson-num { color: var(--yellow); }
+    .lesson-last { border-bottom: none; }
+    .lesson-num {
+      font-family: var(--f-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      color: rgba(139,186,221,.5);
+      flex-shrink: 0;
+      width: 32px;
+      transition: color .25s ease;
+    }
+    .lesson-title {
+      font-family: var(--f-body);
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba(220,232,245,.88);
+      line-height: 1.4;
     }
 
     /* Lesson list */
@@ -571,12 +618,6 @@
        SECTION : ABOUT
        Asymmetric 40/60 split, image left
     ────────────────────────────────*/
-    .about {
-      background: var(--cream);
-      border-top: 1.5px solid var(--border);
-      padding: 0 0 6rem;
-    }
-
     .about-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -743,6 +784,403 @@
       text-transform: uppercase;
       color: rgba(255,255,255,.18);
     }
+    /* ──────────────────────────────
+       SCHEDULE — 新班日期
+    ────────────────────────────────*/
+    .schedule-wrap {
+      margin-top: 5rem;
+      padding-top: 4rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+
+    .schedule-header {
+      margin-bottom: 2.5rem;
+    }
+    .schedule-header .schedule-note {
+      font-size: 14px;
+      color: rgba(210,225,240,.65);
+      margin-top: .5rem;
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    @media(min-width:640px){
+      .schedule-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .schedule-item {
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      transition: padding-left .25s ease;
+    }
+    @media(min-width:640px){
+      .schedule-item {
+        padding: 2rem 2rem 2rem 0;
+        border-right: 1px solid rgba(255,255,255,.08);
+        border-bottom: none;
+      }
+      .schedule-item:nth-child(2n){ padding-right: 0; padding-left: 2rem; border-right: none; }
+      .schedule-item:nth-child(n+3){ border-top: 1px solid rgba(255,255,255,.08); }
+    }
+    .schedule-item:hover { padding-left: .75rem; }
+
+    .schedule-tag {
+      display: inline-block;
+      font-family: var(--f-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      background: rgba(122,184,106,.18);
+      color: var(--green-soft);
+      border: 1px solid rgba(122,184,106,.3);
+      border-radius: 3px;
+      padding: 2px 10px;
+      margin-bottom: 1rem;
+    }
+    .schedule-tag--adv {
+      background: rgba(240,201,58,.15);
+      color: var(--yellow);
+      border-color: rgba(240,201,58,.3);
+    }
+
+    .schedule-name {
+      font-family: var(--f-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.3;
+      margin-bottom: .75rem;
+    }
+
+    .schedule-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .schedule-date {
+      font-family: var(--f-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--yellow);
+    }
+    .schedule-sep {
+      color: rgba(238,245,235,.25);
+      font-size: 14px;
+    }
+    .schedule-time {
+      font-size: 15px;
+      color: rgba(210,225,240,.78);
+      font-weight: 300;
+    }
+    .schedule-note-sub {
+      font-size: 13px;
+      color: rgba(210,225,240,.45);
+      margin-top: .5rem;
+      font-style: italic;
+    }
+    .schedule-req {
+      font-size: 13px;
+      color: rgba(240,201,58,.6);
+      margin-top: .5rem;
+      font-style: italic;
+    }
+
+    /* ──────────────────────────────
+       EXERCISE — 運動課
+    ────────────────────────────────*/
+    .exercise {
+      background: #2E3828;
+      padding: 6rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .exercise::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      border: 80px solid rgba(122,184,106,.05);
+      right: -200px; bottom: -200px;
+      pointer-events: none;
+    }
+
+    /* 介紹文 */
+    .exercise-intro-wrap { position: relative; z-index: 1; margin-bottom: 4rem; }
+
+    .exercise-title {
+      font-family: var(--f-display);
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      color: var(--white);
+      margin: 1rem 0 2rem;
+    }
+    .exercise-title em {
+      font-style: normal;
+      color: var(--yellow);
+    }
+
+    .exercise-intro-body {
+      max-width: 680px;
+      border-left: 3px solid var(--green-soft);
+      padding-left: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .exercise-intro-body p {
+      font-size: 16px;
+      color: rgba(238,245,235,.65);
+      line-height: 1.9;
+      font-weight: 300;
+      margin-bottom: .75rem;
+    }
+    .exercise-intro-body p:last-child { margin-bottom: 0; }
+
+    /* 吃到飽方案 */
+    .exercise-buffet {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 6px;
+      background: rgba(240,201,58,.1);
+      border: 1px solid rgba(240,201,58,.3);
+      border-radius: 8px;
+      padding: 1.25rem 1.75rem;
+    }
+    .exercise-buffet-label {
+      font-family: var(--f-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+    .exercise-buffet-price {
+      font-family: var(--f-display);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--yellow);
+      letter-spacing: -.02em;
+    }
+    .exercise-buffet-price span {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(240,201,58,.6);
+    }
+    .exercise-buffet-desc {
+      font-size: 14px;
+      color: rgba(238,245,235,.5);
+      font-weight: 300;
+      line-height: 1.6;
+      max-width: 320px;
+    }
+
+    /* 班級列表 */
+    .exercise-classes {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      border-top: 1px solid rgba(255,255,255,.1);
+      position: relative; z-index: 1;
+      margin-bottom: 4rem;
+    }
+
+    .exercise-class {
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      transition: padding-left .25s ease;
+    }
+    .exercise-class:hover { padding-left: .5rem; }
+
+    .exercise-class-header {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .exercise-mode-icon { font-size: 1.6rem; flex-shrink: 0; }
+
+    .exercise-class-day {
+      font-family: var(--f-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .exercise-class-mode {
+      font-size: 14px;
+      color: rgba(238,245,235,.75);
+      margin-top: 2px;
+      font-weight: 300;
+    }
+
+    .exercise-class-price-wrap {
+      margin-left: auto;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .exercise-class-price {
+      display: block;
+      font-family: var(--f-display);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--yellow);
+      letter-spacing: -.02em;
+      line-height: 1.1;
+    }
+    .exercise-class-count {
+      font-size: 13px;
+      color: rgba(238,245,235,.75);
+      font-weight: 300;
+    }
+
+    .exercise-dates {
+      display: block;
+    }
+    .exercise-dates-text {
+      font-size: 15px;
+      color: rgba(238,245,235,.78);
+      font-weight: 300;
+      line-height: 1.9;
+      letter-spacing: .02em;
+    }
+      transition: background .2s ease, color .2s ease;
+    }
+    .exercise-class:hover .exercise-dates span {
+      background: rgba(122,184,106,.15);
+      color: rgba(238,245,235,.85);
+    }
+
+    /* 補課 & 注意事項 */
+    .exercise-notes {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      position: relative; z-index: 1;
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 3rem;
+    }
+    @media(min-width:680px){
+      .exercise-notes { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    }
+
+    .exercise-note-block {
+      padding: 1.5rem;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 8px;
+    }
+    .exercise-note-title {
+      font-family: var(--f-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: .6rem;
+      line-height: 1.4;
+    }
+    .exercise-note-sub {
+      font-size: 14px;
+      color: rgba(238,245,235,.5);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .exercise-makeup {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .makeup-day {
+      font-family: var(--f-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--green-soft);
+      margin-right: 10px;
+      display: inline-block;
+      width: 28px;
+    }
+    .makeup-time {
+      font-size: 15px;
+      color: rgba(238,245,235,.7);
+    }
+
+    .exercise-single-prices {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 1rem;
+    }
+    .exercise-single-prices span {
+      font-size: 15px;
+      color: rgba(238,245,235,.6);
+    }
+    .exercise-single-prices strong {
+      font-family: var(--f-display);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--yellow);
+    }
+
+    /* ──────────────────────────────
+       IMAGE BLOCKS — responsive
+    ────────────────────────────────*/
+    /* Full-bleed accent image strip between sections */
+    .img-strip {
+      width: 100%;
+      height: 260px;
+      overflow: hidden;
+      position: relative;
+    }
+    @media(min-width:768px){ .img-strip { height: 380px; } }
+    .img-strip img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: grayscale(15%);
+      transition: filter 1.5s ease, transform 1.5s ease;
+    }
+    .img-strip:hover img { filter: grayscale(0%); transform: scale(1.03); }
+
+    /* Side image inside a section (desktop only) */
+    .side-img {
+      display: none;
+    }
+    @media(min-width:900px){
+      .side-img {
+        display: block;
+        width: 320px;
+        flex-shrink: 0;
+        border-radius: 4px;
+        overflow: hidden;
+        align-self: stretch;
+      }
+      .side-img img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        filter: grayscale(20%);
+        transition: filter 1.5s ease;
+      }
+      .side-img:hover img { filter: grayscale(0%); }
+    }
+
+    /* hide image strip on mobile */
+    .img-strip--hide-mobile { display: none; }
+    @media(min-width:768px){ .img-strip--hide-mobile { display: block; } }
+
+    /* about section fix */
+    .about {
+      background: var(--green-pale);
+      border-top: none;
+      padding: 0 0 6rem;
+    }
+
   </style>
 </head>
 <body>
@@ -790,6 +1228,11 @@
     </div>
   </div>
 </section>
+
+<!-- ── IMAGE STRIP 1 ── -->
+<div class="img-strip">
+  <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=1400&q=80" alt="" loading="lazy" />
+</div>
 
 <!-- ── METHOD ── -->
 <section class="method rv">
@@ -854,8 +1297,195 @@
     <div class="rv" style="margin-top:3.5rem">
       <a class="btn btn-fill" href="https://line.me/R/ti/p/@207iwzob" target="_blank">我要了解課程</a>
     </div>
+
+    <!-- 新班日期 -->
+    <div class="schedule-wrap rv">
+      <div class="schedule-header">
+        <span class="course-sec-label">📌 新班資訊</span>
+        <p class="schedule-note">現場線上同步，請假提供課程錄影補課</p>
+      </div>
+
+      <div class="schedule-grid">
+
+        <div class="schedule-item">
+          <div class="schedule-tag">初階</div>
+          <p class="schedule-name">重建健康方程式 21 班</p>
+          <div class="schedule-meta">
+            <span class="schedule-date">4/10 起</span>
+            <span class="schedule-sep">·</span>
+            <span class="schedule-time">每週五　19:15 – 20:45</span>
+          </div>
+          <p class="schedule-note-sub">身體秘境</p>
+        </div>
+
+        <div class="schedule-item">
+          <div class="schedule-tag">初階</div>
+          <p class="schedule-name">重建健康方程式 22 班</p>
+          <div class="schedule-meta">
+            <span class="schedule-date">4/12 起</span>
+            <span class="schedule-sep">·</span>
+            <span class="schedule-time">每週日　10:00 – 11:30</span>
+          </div>
+        </div>
+
+        <div class="schedule-item">
+          <div class="schedule-tag">初階</div>
+          <p class="schedule-name">重建健康方程式 23 班</p>
+          <div class="schedule-meta">
+            <span class="schedule-date">4/20 起</span>
+            <span class="schedule-sep">·</span>
+            <span class="schedule-time">每週一　19:00 – 20:30</span>
+          </div>
+        </div>
+
+        <div class="schedule-item schedule-item--advanced">
+          <div class="schedule-tag schedule-tag--adv">🚩 進階</div>
+          <p class="schedule-name">健康方程式進階 3 班</p>
+          <div class="schedule-meta">
+            <span class="schedule-date">4/15 起</span>
+          </div>
+          <p class="schedule-req">需至少完成一期初階</p>
+        </div>
+
+      </div>
+    </div>
   </div>
 </section>
+
+<!-- ── EXERCISE ── -->
+<section class="exercise">
+  <div class="outer">
+
+    <!-- 介紹文 -->
+    <div class="rv exercise-intro-wrap">
+      <div style="display:flex;gap:3rem;align-items:flex-start">
+        <div style="flex:1;min-width:0">
+          <span class="sec-label" style="color:var(--green-soft)">運動課</span>
+          <h2 class="exercise-title">春天，是身體最適合<br>「<em>甦醒</em>」的時刻 🌱</h2>
+          <div class="exercise-intro-body">
+            <p>擺脫冬天的沉悶感，動起來 💪 是給身心最划算的投資。這一季訓練，以道家功法結合徒手肌力，把呼吸空間打開、疏導夏天容易累積的火氣；持續建立「由核心啟動」的發力習慣，帶動深層筋膜與各肌群的運用。</p>
+            <p>每堂課最少 10 分鐘高強度間歇，用最有效率方式拉高心肺功能，及增加身體抗癌力，提高身體效能，同步養身、養心、養氣。</p>
+          </div>
+          <!-- 吃到飽方案 -->
+          <div class="exercise-buffet">
+            <div class="exercise-buffet-label">吃到飽方案</div>
+            <div class="exercise-buffet-price">$4,800 <span>／ 12 週</span></div>
+            <p class="exercise-buffet-desc">每堂內容都不同，吃到飽的朋友可以享有更完整的全身訓練。</p>
+          </div>
+        </div>
+        <div class="side-img">
+          <img src="rita.jpg" alt="運動課示意" loading="lazy" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 班級列表 -->
+    <div class="exercise-classes rv">
+
+      <div class="exercise-class">
+        <div class="exercise-class-header">
+          <span class="exercise-mode-icon">💻</span>
+          <div>
+            <p class="exercise-class-day">週二　7:30 – 8:30</p>
+            <p class="exercise-class-mode">Zoom 線上</p>
+          </div>
+          <div class="exercise-class-price-wrap">
+            <span class="exercise-class-price">$3,000</span>
+            <span class="exercise-class-count">12 堂課</span>
+          </div>
+        </div>
+        <div class="exercise-dates">
+          <p class="exercise-dates-text">4/7、4/14、4/21、4/28、5/5、5/12、5/19、6/2、6/9、6/16、6/23、6/30</p>
+        </div>
+      </div>
+
+      <div class="exercise-class">
+        <div class="exercise-class-header">
+          <span class="exercise-mode-icon">🤼</span>
+          <div>
+            <p class="exercise-class-day">週三　7:30 – 8:30</p>
+            <p class="exercise-class-mode">現場 ＋ 線上同步</p>
+          </div>
+          <div class="exercise-class-price-wrap">
+            <span class="exercise-class-price">$3,000</span>
+            <span class="exercise-class-count">12 堂課</span>
+          </div>
+        </div>
+        <div class="exercise-dates">
+          <p class="exercise-dates-text">4/8、4/15、4/22、4/29、5/6、5/13、5/20、6/3、6/10、6/17、6/24、7/1</p>
+        </div>
+      </div>
+
+      <div class="exercise-class">
+        <div class="exercise-class-header">
+          <span class="exercise-mode-icon">🤼</span>
+          <div>
+            <p class="exercise-class-day">週四　19:30 – 21:00</p>
+            <p class="exercise-class-mode">現場 ＋ 線上同步</p>
+          </div>
+          <div class="exercise-class-price-wrap">
+            <span class="exercise-class-price">$3,600</span>
+            <span class="exercise-class-count">12 堂課</span>
+          </div>
+        </div>
+        <div class="exercise-dates">
+          <p class="exercise-dates-text">4/9、4/16、4/23、4/30、5/7、5/14、5/28、6/4、6/11、6/18、6/25、7/2</p>
+        </div>
+      </div>
+
+      <div class="exercise-class">
+        <div class="exercise-class-header">
+          <span class="exercise-mode-icon">🤼</span>
+          <div>
+            <p class="exercise-class-day">週五　8:50 – 9:50</p>
+            <p class="exercise-class-mode">現場 ＋ 線上同步</p>
+          </div>
+          <div class="exercise-class-price-wrap">
+            <span class="exercise-class-price">$2,500</span>
+            <span class="exercise-class-count">10 堂課</span>
+          </div>
+        </div>
+        <div class="exercise-dates">
+          <p class="exercise-dates-text">4/10、4/17、4/24、5/8、5/15、5/29、6/5、6/12、6/26、7/3</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 補課 & 注意事項 -->
+    <div class="exercise-notes rv">
+
+      <div class="exercise-note-block">
+        <p class="exercise-note-title">🔔 額外補課時間（Zoom 線上）</p>
+        <p class="exercise-note-sub">來補課請提早通知（有時候課程安排會停課）</p>
+        <div class="exercise-makeup">
+          <div><span class="makeup-day">週一</span><span class="makeup-time">20:00 – 20:30</span></div>
+          <div><span class="makeup-day">週日</span><span class="makeup-time">18:00 – 18:30</span></div>
+        </div>
+      </div>
+
+      <div class="exercise-note-block">
+        <p class="exercise-note-title">🔔 上課請準備</p>
+        <p class="exercise-note-sub">換洗衣物、溫鹽水 or 枸杞水、大毛巾<br>週四同學請額外準備按摩硬球</p>
+      </div>
+
+      <div class="exercise-note-block exercise-single">
+        <p class="exercise-note-title">📍 單堂課費用</p>
+        <div class="exercise-single-prices">
+          <span>平日 <strong>$300</strong> ／堂</span>
+          <span>週四晚課 <strong>$400</strong> ／堂</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ── IMAGE STRIP 3 (desktop only) ── -->
+<div class="img-strip img-strip--hide-mobile">
+  <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1400&q=80" alt="" loading="lazy" />
+</div>
 
 <!-- ── AUDIENCE ── -->
 <section class="audience">
@@ -889,6 +1519,11 @@
     </div>
   </div>
 </section>
+
+<!-- ── IMAGE STRIP 2 ── -->
+<div class="img-strip">
+  <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=1400&q=80" alt="" loading="lazy" />
+</div>
 
 <!-- ── ABOUT ── -->
 <section class="about">
